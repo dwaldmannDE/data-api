@@ -1,0 +1,7 @@
+django
+django-filter
+django-rest-swagger
+djangorestframework
+gunicorn
+pyyaml
+uritemplate
