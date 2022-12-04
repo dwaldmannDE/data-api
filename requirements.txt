@@ -9,3 +9,4 @@ psycopg2-binary
 pyyaml
 uritemplate
 whitenoise
+whitenoise[brotli]
