@@ -3,8 +3,8 @@ pipeline {
     environment {
         DOCKER_CREDENTIALS = credentials('harbor')
         REGISTRY = 'harbor.kube.itdw.io'
-        ORG = 'danielwaldmann'
-        APP = 'django-rest'
+        ORG = 'publictransport'
+        APP = 'django'
         BUILDVERSION = sh(script: "date +%Y-%m-%d-%H-%M", returnStdout: true).trim()
         RECIPIENT = 'daniel@dwaldmann.de'
     }
