@@ -16,9 +16,14 @@ class TrainSerializer(serializers.HyperlinkedModelSerializer):
 class StopoverSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Stopover
-        fields = ['station_id', 'stop_index', 'train_id', 'platform', 'departure_time', 'departure_scheduled_time', 'arrival_time', 'arrival_scheduled_time', 'departure_delay', 'arrival_delay']
+        fields = ['station_id', 'stop_index', 'train_id', 'platform', 'departure_time', 'departure_scheduled_time', 'arrival_time', 'arrival_scheduled_time']
 
 class RemarkSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Remark
+        fields = ['train_id', 'message']
+
+class CompositionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Remark
         fields = ['train_id', 'message']

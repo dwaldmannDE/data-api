@@ -55,3 +55,9 @@ class Stopover(models.Model):
     departure_scheduled_time = models.DateTimeField(blank=True, null=True)
     arrival_time = models.DateTimeField(blank=True, null=True)
     arrival_scheduled_time = models.DateTimeField(blank=True, null=True)
+
+class Composition(models.Model):
+    
+    train = models.ForeignKey(Train, on_delete=models.CASCADE)
+    coach_sequence = models.JSONField()
+    

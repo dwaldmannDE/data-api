@@ -1,30 +1,18 @@
-from api.models import Station, Train, Stopover, Remark
-from rest_framework import viewsets, generics
+from api.models import Station, Train, Stopover, Remark, Composition
+from rest_framework import viewsets
 import django_filters.rest_framework
-from api.serializers import StationSerializer, TrainSerializer, StopoverSerializer, RemarkSerializer
-
+from api.serializers import StationSerializer, TrainSerializer, StopoverSerializer, RemarkSerializer, CompositionSerializer
 
 # Create your views here.
 
-class StationViewSet(viewsets.ReadOnlyModelViewSet):
+class StationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows stations to be viewed or edited.
     """
     queryset = Station.objects.all().order_by('eva_number')
     serializer_class = StationSerializer
-    permission_classes = []
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_fields = ['usage','eva_number']
-
-class StationListView(generics.ListAPIView):
-    """
-    API endpoint that allows stations to be listed.
-    """
-    queryset = Station.objects.all().order_by('eva_number')
-    serializer_class = StationSerializer
-    permission_classes = []
-    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ['usage']
 
 class TrainViewSet(viewsets.ModelViewSet):
     """
@@ -32,7 +20,6 @@ class TrainViewSet(viewsets.ModelViewSet):
     """
     queryset = Train.objects.all()
     serializer_class = TrainSerializer
-    permission_classes = []
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
     filterset_fields = ['cancelled', 'date']
 
@@ -43,7 +30,6 @@ class StopoverViewSet(viewsets.ModelViewSet):
     """
     queryset = Stopover.objects.all()
     serializer_class = StopoverSerializer
-    permission_classes = []
 
 class RemarkViewSet(viewsets.ModelViewSet):
     """
@@ -51,4 +37,10 @@ class RemarkViewSet(viewsets.ModelViewSet):
     """
     queryset = Remark.objects.all()
     serializer_class = RemarkSerializer
-    permission_classes = []
+
+class CompositionViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows Compositions to be viewed or edited.
+    """
+    queryset = Composition.objects.all()
+    serializer_class = CompositionSerializer

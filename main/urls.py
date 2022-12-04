@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.urls import include, path
 from rest_framework import routers
+from django.contrib import admin
 from rest_framework.schemas import get_schema_view
 from django.views.generic import TemplateView
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+
 
 from api import views
 
@@ -25,17 +28,14 @@ router.register(r'stations', views.StationViewSet)
 router.register(r'trains', views.TrainViewSet)
 router.register(r'stopovers', views.StopoverViewSet)
 router.register(r'remarks', views.RemarkViewSet)
+router.register(r'compositions', views.RemarkViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('station-list/', views.StationListView.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('openapi', get_schema_view(
-        title="Your Project",
-        description="API for all things …"
-    ), name='openapi-schema'),
-    path('swagger-ui/', TemplateView.as_view(
-        template_name='swagger-ui.html',
-        extra_context={'schema_url':'openapi-schema'}
-    ), name='swagger-ui')
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),    
+    path('admin/', admin.site.urls),
 ]

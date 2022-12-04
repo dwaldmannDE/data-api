@@ -2,10 +2,6 @@ FROM harbor.kube.itdw.io/docker/library/python:3.11-bullseye
 
 EXPOSE 8000
 
-ENV PYTHONDONTWRITEBYTECODE=1
-
-ENV PYTHONUNBUFFERED=1
-
 WORKDIR /code
 
 COPY requirements.txt /code/requirements.txt
@@ -14,6 +10,6 @@ COPY . /code
 
 RUN pip install --upgrade pip && pip install --no-cache-dir -r /code/requirements.txt && pip install --no-cache-dir autopep8
 
-#RUN python manage.py migrate
+RUN chmod +x run.sh
 
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "train_web.wsgi"]

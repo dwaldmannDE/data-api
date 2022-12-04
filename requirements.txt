@@ -1,7 +1,9 @@
 django
 django-filter
-django-rest-swagger
 djangorestframework
+drf-spectacular
+drf-spectacular[sidecar]
+django-environ
 gunicorn
 pyyaml
 uritemplate
