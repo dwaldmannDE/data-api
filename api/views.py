@@ -2,9 +2,12 @@ from api.models import Station, Train, Stopover, Remark, Composition
 from rest_framework import viewsets
 import django_filters.rest_framework
 from api.serializers import StationSerializer, TrainSerializer, StopoverSerializer, RemarkSerializer, CompositionSerializer
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 # Create your views here.
 
+@method_decorator(cache_control(public=True, max_age=60*60*12), name='dispatch')
 class StationViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows stations to be viewed or edited.
