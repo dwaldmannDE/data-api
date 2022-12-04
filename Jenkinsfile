@@ -20,7 +20,7 @@ pipeline {
         stage('Build & Publish') {
             steps {
                 echo 'Building and Publishing image to Registry ...'
-                sh 'docker buildx create --use && docker buildx build --pull --push --no-cache --platform linux/amd64,linux/arm64 --tag ${REGISTRY}/${ORG}/${APP}:latest --tag ${REGISTRY}/${ORG}/${APP}:${BUILDVERSION} .'
+                sh 'docker buildx build --pull --push --no-cache --tag ${REGISTRY}/${ORG}/${APP}:latest --tag ${REGISTRY}/${ORG}/${APP}:${BUILDVERSION} .'
             }
         }
         stage('Cleanup') {
