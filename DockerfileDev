@@ -12,8 +12,6 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r /code/requirement
 
 RUN chmod +x run.sh
 
-RUN python manage.py migrate && python manage.py loaddata seeds/station_seed.json && python manage.py createcachetable && python manage.py initadmin
-
 EXPOSE 8000
 
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "train_web.wsgi"]
