@@ -1,9 +1,10 @@
 django
+django-environ
 django-filter
 djangorestframework
 drf-spectacular
 drf-spectacular[sidecar]
-django-environ
 gunicorn
+psycopg2-binary
 pyyaml
 uritemplate

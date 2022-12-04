@@ -21,7 +21,7 @@ class TrainViewSet(viewsets.ModelViewSet):
     queryset = Train.objects.all()
     serializer_class = TrainSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ['cancelled', 'date']
+    filterset_fields = ['cancelled', 'date','journey_id']
 
 
 class StopoverViewSet(viewsets.ModelViewSet):
@@ -30,6 +30,8 @@ class StopoverViewSet(viewsets.ModelViewSet):
     """
     queryset = Stopover.objects.all()
     serializer_class = StopoverSerializer
+    filterset_fields = ['train']
+
 
 class RemarkViewSet(viewsets.ModelViewSet):
     """
@@ -37,6 +39,7 @@ class RemarkViewSet(viewsets.ModelViewSet):
     """
     queryset = Remark.objects.all()
     serializer_class = RemarkSerializer
+    filterset_fields = ['train']
 
 class CompositionViewSet(viewsets.ModelViewSet):
     """
@@ -44,3 +47,4 @@ class CompositionViewSet(viewsets.ModelViewSet):
     """
     queryset = Composition.objects.all()
     serializer_class = CompositionSerializer
+    filterset_fields = ['train']
