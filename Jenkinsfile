@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_CREDENTIALS = credentials('4ba56718-b8a2-41b2-99da-7bfecf4bc941')
+        DOCKER_CREDENTIALS = credentials('harbor')
         REGISTRY = 'harbor.kube.itdw.io'
         ORG = 'danielwaldmann'
         APP = 'django-rest'
