@@ -8,7 +8,7 @@ COPY requirements.txt /code/requirements.txt
 
 COPY . /code
 
-RUN pip install --upgrade pip && pip install --no-cache-dir -r /code/requirements.txt
+RUN apt install -y grep && pip install --upgrade pip && pip install --no-cache-dir -r /code/requirements.txt
 
 RUN chmod +x run.sh
 
