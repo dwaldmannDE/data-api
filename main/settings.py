@@ -33,7 +33,7 @@ SECRET_KEY =  env.str('SECRET', 'django-insecure-g-8_z!yv_qv&eb9&5jilcg3&^%rc-df
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [env.str('URL')]
 
 # Application definition
 
@@ -98,7 +98,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': env.str('DB_NAME', 'django-rest'),
+            'NAME': env.str('DB_NAME', 'django'),
             'USER': env.str('DB_USER', 'django'),
             'PASSWORD': env.str('DB_PASSWORD', 'django'),
             'HOST': env.str('DB_HOST', '127.0.0.1'),
@@ -177,16 +177,15 @@ CACHES = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Public Transport | Daniel Waldmann',
-    'DESCRIPTION': 'The aim of this application is to collect and provide data on the topic of public transport with a focus on long-distance passenger rail transport and air traffic at German airports. ',
+    'TITLE': 'Data API | Daniel Waldmann',
+    'DESCRIPTION': 'This project is the central API used to store and output data from the "Data Collection" project. Implemented with Django and the Django Rest Framework',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
-    # OTHER SETTINGS
 }
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-CSRF_TRUSTED_ORIGINS = ['https://django.kube-test.itdw.io']
+CSRF_TRUSTED_ORIGINS = [env.str('URL')]
 
 if DEBUG:
     pass
