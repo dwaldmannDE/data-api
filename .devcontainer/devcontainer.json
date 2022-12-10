@@ -17,9 +17,9 @@
 		}
 	},
 	"containerEnv": {
-		"DJANGO_SU_PASSWORD": "Iha4Wum8",
-		"DJANGO_SU_EMAIL": "daniel@dwaldmann.de",
-		"DJANGO_SU_NAME": "daniel"
+		"DJANGO_SU_PASSWORD": "example123!",
+		"DJANGO_SU_EMAIL": "admin@example.org",
+		"DJANGO_SU_NAME": "admin"
 	}
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
