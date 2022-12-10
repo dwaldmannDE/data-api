@@ -1,5 +1,7 @@
 FROM harbor.kube.itdw.io/docker/library/python:3.11-slim-bullseye
 
+ENV PYTHONUNBUFFERED=1 
+
 EXPOSE 8080
 
 WORKDIR /code
