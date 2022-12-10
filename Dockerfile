@@ -1,6 +1,6 @@
 FROM harbor.kube.itdw.io/docker/library/python:3.11-slim-bullseye
 
-EXPOSE 8000
+EXPOSE 8080
 
 WORKDIR /code
 
