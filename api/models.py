@@ -47,13 +47,16 @@ class Train(models.Model):
         Station, on_delete=models.CASCADE, related_name='train_destination')
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return '{} - {}'.format(self.name, self.date)
 
 
 class Remark(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     train = models.ForeignKey(Train, on_delete=models.CASCADE)
     message = models.CharField(max_length=256)
+
+    def __str__(self):
+        return '{}'.format(self.message)
 
 
 class Stopover(models.Model):
@@ -67,6 +70,8 @@ class Stopover(models.Model):
     arrival_planned_time = models.DateTimeField(blank=True, null=True)
     arrival_actual_time = models.DateTimeField(blank=True, null=True)
 
+    def __str__(self):
+        return '{}'.format(self.stop_index)
 
 class Composition(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
