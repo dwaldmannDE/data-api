@@ -1,19 +1,13 @@
+import uuid
 from django.db import models
-from datetime import date
+from django.utils import timezone
 # Create your models here.
 
 
 class Station(models.Model):
 
-    USAGE = (
-        ('FV', 'Fernverkehr'),
-        ('RV', 'Regionalverkehr'),
-        ('XX', 'Nicht DB'),
-    )
-
-    eva_number = models.CharField(max_length=16, unique=True)
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=64)
-    usage = models.CharField(max_length=2, choices=USAGE, default='XX')
     lng = models.DecimalField(max_digits=9, decimal_places=7)
     lat = models.DecimalField(max_digits=9, decimal_places=7)
 
@@ -21,43 +15,60 @@ class Station(models.Model):
         return self.name
 
 
-class Train(models.Model):
+class Operator(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=255)
 
-    line = models.CharField(max_length=4)
-    number = models.IntegerField()
-    type = models.CharField(max_length=8)
-    operator = models.CharField(max_length=32)
-    date = models.DateField(default=date.today)
+    def __str__(self):
+        return self.name
+
+
+class Line(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    number = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    product = models.CharField(max_length=255)
+    operator = models.ForeignKey(Operator, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class Train(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=64)
+    line = models.ForeignKey(Line, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now)
     cancelled = models.BooleanField(default=False)
-    journey_id = models.CharField(max_length=16)
-    origin = models.OneToOneField(
+    trip_id = models.CharField(max_length=64)
+    origin = models.ForeignKey(
         Station, on_delete=models.CASCADE, related_name='train_origin')
-    destination = models.OneToOneField(
+    destination = models.ForeignKey(
         Station, on_delete=models.CASCADE, related_name='train_destination')
 
     def __str__(self):
-        return '{} {}'.format(self.type, self.number)
+        return '{}'.format(self.name)
 
 
 class Remark(models.Model):
-
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     train = models.ForeignKey(Train, on_delete=models.CASCADE)
     message = models.CharField(max_length=256)
 
 
 class Stopover(models.Model):
-
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     station = models.ForeignKey(Station, on_delete=models.CASCADE)
     stop_index = models.IntegerField()
     train = models.ForeignKey(Train, on_delete=models.CASCADE)
     platform = models.CharField(max_length=32, blank=True, null=True)
-    departure_time = models.DateTimeField(blank=True, null=True)
-    departure_scheduled_time = models.DateTimeField(blank=True, null=True)
-    arrival_time = models.DateTimeField(blank=True, null=True)
-    arrival_scheduled_time = models.DateTimeField(blank=True, null=True)
+    departure_planned_time = models.DateTimeField(blank=True, null=True)
+    departure_actual_time = models.DateTimeField(blank=True, null=True)
+    arrival_planned_time = models.DateTimeField(blank=True, null=True)
+    arrival_actual_time = models.DateTimeField(blank=True, null=True)
+
 
 class Composition(models.Model):
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     train = models.ForeignKey(Train, on_delete=models.CASCADE)
     coach_sequence = models.JSONField()
-    

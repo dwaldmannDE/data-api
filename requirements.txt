@@ -10,3 +10,4 @@ pyyaml
 uritemplate
 whitenoise
 whitenoise[brotli]
+shortuuid

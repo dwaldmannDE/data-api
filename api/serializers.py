@@ -1,29 +1,46 @@
-from api.models import Station, Train, Stopover, Remark
+from api.models import Station, Operator, Line, Train, Stopover, Remark, Composition
 from rest_framework import serializers
 
 
 class StationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Station
-        fields = ['eva_number', 'name', 'usage', 'lng', 'lat']
+        fields = ['id', 'name', 'lng', 'lat', 'url']
+
+
+class OperatorSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Operator
+        fields = ['id', 'name', 'url']
+
+
+class LineSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Line
+        fields = ['id', 'number', 'name', 'product', 'operator', 'url']
 
 
 class TrainSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Train
-        fields = ['line', 'number', 'type', 'operator', 'date', 'cancelled', 'journey_id', 'origin', 'destination']
+        fields = ['id', 'name', 'line', 'date', 'cancelled',
+                  'trip_id', 'origin', 'destination', 'url']
+
 
 class StopoverSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Stopover
-        fields = ['station_id', 'stop_index', 'train_id', 'platform', 'departure_time', 'departure_scheduled_time', 'arrival_time', 'arrival_scheduled_time']
+        fields = ['id', 'station', 'stop_index', 'train', 'platform', 'departure_planned_time',
+                  'departure_actual_time', 'arrival_planned_time', 'arrival_actual_time', 'url']
+
 
 class RemarkSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Remark
-        fields = ['train_id', 'message']
+        fields = ['id', 'train', 'message', 'url']
+
 
 class CompositionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Remark
-        fields = ['train_id', 'message']
+        model = Composition
+        fields = ['id', 'train', 'composition', 'url']

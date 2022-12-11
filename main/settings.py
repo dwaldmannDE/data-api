@@ -11,12 +11,14 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import os 
+import os
 import environ
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, True),
+    URL=(str, 'http://127.0.0.1'),
+    SECRET=(str, 'django-insecure-g-8_z!yv_qv&eb9&5jilcg3&^%rc-df*dj$l5@_421pckw4ykb')
 )
 env.read_env()
 
@@ -28,12 +30,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =  env.str('SECRET', 'django-insecure-g-8_z!yv_qv&eb9&5jilcg3&^%rc-df*dj$l5@_421pckw4ykb')
+SECRET_KEY = env.str('SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = [env.str('URL')]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -98,11 +100,11 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': env.str('DB_NAME', 'django'),
-            'USER': env.str('DB_USER', 'django'),
-            'PASSWORD': env.str('DB_PASSWORD', 'django'),
-            'HOST': env.str('DB_HOST', '127.0.0.1'),
-            'PORT': env.str('DB_PORT', '5432'),
+            'NAME': env.str('DB_NAME'),
+            'USER': env.str('DB_USER'),
+            'PASSWORD': env.str('DB_PASSWORD'),
+            'HOST': env.str('DB_HOST'),
+            'PORT': env.str('DB_PORT'),
             'TIME_ZONE': 'Europe/Berlin'
         }
     }
