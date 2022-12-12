@@ -5,7 +5,7 @@ from rest_framework import serializers
 class StationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Station
-        fields = ['id', 'name', 'lng', 'lat', 'url']
+        fields = ['id', 'eva_number','name', 'lng', 'lat', 'url']
 
 
 class OperatorSerializer(serializers.HyperlinkedModelSerializer):
@@ -43,4 +43,4 @@ class RemarkSerializer(serializers.HyperlinkedModelSerializer):
 class CompositionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Composition
-        fields = ['id', 'train', 'composition', 'url']
+        fields = ['id', 'train', 'coach_sequence', 'url']

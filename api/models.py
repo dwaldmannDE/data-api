@@ -5,8 +5,8 @@ from django.utils import timezone
 
 
 class Station(models.Model):
-
-    id = models.IntegerField(primary_key=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    eva_number = models.IntegerField()
     name = models.CharField(max_length=64)
     lng = models.DecimalField(max_digits=9, decimal_places=7)
     lat = models.DecimalField(max_digits=9, decimal_places=7)

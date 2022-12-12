@@ -14,6 +14,8 @@ class StationViewSet(viewsets.ModelViewSet):
     """
     queryset = Station.objects.all().order_by('id')
     serializer_class = StationSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields = ['eva_number', 'name']
 
 class LineViewSet(viewsets.ModelViewSet):
     """
@@ -69,4 +71,4 @@ class CompositionViewSet(viewsets.ModelViewSet):
     queryset = Composition.objects.all()
     serializer_class = CompositionSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ['train','composition']
+    filterset_fields = ['train']
