@@ -4,7 +4,8 @@
       "eva_number": "8000096",
       "lat": "9.181635",
       "lng": "48.784084",
-      "name": "Stuttgart Hbf"
+      "name": "Stuttgart Hbf",
+      "query": "True"
     },
     "model": "api.station",
     "pk": "47e10166-763d-45ab-8822-42f2ccb5e75e"

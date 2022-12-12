@@ -15,7 +15,7 @@ class StationViewSet(viewsets.ModelViewSet):
     queryset = Station.objects.all().order_by('id')
     serializer_class = StationSerializer
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
-    filterset_fields = ['eva_number', 'name']
+    filterset_fields = ['eva_number', 'name', 'query']
 
 class LineViewSet(viewsets.ModelViewSet):
     """

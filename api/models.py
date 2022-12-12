@@ -10,6 +10,7 @@ class Station(models.Model):
     name = models.CharField(max_length=64)
     lng = models.DecimalField(max_digits=9, decimal_places=7)
     lat = models.DecimalField(max_digits=9, decimal_places=7)
+    query = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
