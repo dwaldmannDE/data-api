@@ -159,8 +159,8 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.UserRateThrottle'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '12/minute',
-        'user': '600/minute'
+        'anon': '20/minute',
+        'user': '6000/minute'
     },
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'SWAGGER_UI_DIST': 'SIDECAR',
